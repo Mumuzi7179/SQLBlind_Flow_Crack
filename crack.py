@@ -72,7 +72,6 @@ def bool_crack(datas):
                     data1 += ' '
         except:
             continue
-    print(data1)
     data2, data3 = ''.join(chr(ord(c) - 1) if c != ' ' else ' ' for c in data1), ''.join(
         chr(ord(c) + 1) if c != ' ' else ' ' for c in data1)
     data4 = ''
