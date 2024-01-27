@@ -35,7 +35,7 @@ def time_crack(datas):
     #第二种
     data2 = ''
     for i in range(len(datas)):
-        data = re.search(r'\)\)=(.*?),sleep', datas[i])
+        data = re.search(r'\)=(.*?),sleep', datas[i])
         if (data):
             data = data.group(1)
             if (data.isdigit() and int(data) > 32):
@@ -75,7 +75,28 @@ def bool_crack(datas):
     print(data1)
     data2, data3 = ''.join(chr(ord(c) - 1) if c != ' ' else ' ' for c in data1), ''.join(
         chr(ord(c) + 1) if c != ' ' else ' ' for c in data1)
-    output = [data1.lstrip(),data2.lstrip(),data3.lstrip()]
+    data4 = ''
+    for i in range(len(datas) - 1):
+        try:
+            chat = re.search(r'\),(\d+),',datas[i])
+            next_chat = re.search(r'\),(\d+),',datas[i+1])
+            if(chat):
+                chat = chat.group(1)
+            if(next_chat):
+                next_chat = next_chat.group(1)
+            if(chat != next_chat):
+                data = re.search(r'\)(>|<|=)(.*?)(--+|#|HTTP)',datas[i])
+                if(data):
+                    data = data.group(2).replace("'", "").replace('"', "")
+                    if(data.isdigit() and int(data) > 32):
+                        data = chr(int(data))
+                try:
+                    data4 += data
+                except:
+                    data4 += ' '
+        except:
+            continue
+    output = [data1.lstrip(),data2.lstrip(),data3.lstrip(),data4.lstrip()]
     return output
 
 def mains(pcap_file):
