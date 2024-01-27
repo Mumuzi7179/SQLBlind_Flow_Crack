@@ -34,12 +34,34 @@ def run_crack():
 
 def run_crack_thread(selected_file_path):
     text_box.delete("1.0", tk.END)
-    text_box.insert(tk.END, "正在尝试分析，请稍后...")
+    text_box.insert(tk.END, "正在尝试分析，请稍后...\n")
     output = mains(selected_file_path)
-    text_box.delete("1.0", tk.END)
     text_box.insert(tk.END, "分析结果如下，以下是可能出现的结果:\n")
+
+    text_box.tag_config("highlight", foreground="red")
+
+    highlight_words = ["flag", "pass", "ctf", "Zmxh"]
     for item in output:
-        text_box.insert(tk.END, item + '\n\n')
+        if len(item) != 0:
+            highlight_in_item(item, highlight_words)
+
+def highlight_in_item(item, words):
+    start = 0
+    while start < len(item):
+        end = len(item)
+        for word in words:
+            index = item.find(word, start)
+            if index != -1:
+                end = min(end, index)
+
+        if end != len(item):
+            text_box.insert(tk.END, item[start:end])
+            word = next(word for word in words if item.startswith(word, end))
+            text_box.insert(tk.END, word, "highlight")
+            start = end + len(word)
+        else:
+            text_box.insert(tk.END, item[start:] + '\n\n')
+            break
 
 root = TkinterDnD.Tk()
 root.title("SQL流量一把梭 尝鲜版")
