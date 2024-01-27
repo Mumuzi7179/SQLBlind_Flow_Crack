@@ -40,7 +40,7 @@ def run_crack_thread(selected_file_path):
 
     text_box.tag_config("highlight", foreground="red")
 
-    highlight_words = ["flag", "pass", "ctf", "Zmxh"]
+    highlight_words = ["flag", "pass", "ctf", "Zmxh",]
     for item in output:
         if len(item) != 0:
             highlight_in_item(item, highlight_words)
@@ -48,17 +48,19 @@ def run_crack_thread(selected_file_path):
 def highlight_in_item(item, words):
     start = 0
     while start < len(item):
-        end = len(item)
+        matched_word = None
+        matched_index = len(item)
         for word in words:
-            index = item.find(word, start)
-            if index != -1:
-                end = min(end, index)
+            if word: 
+                index = item.find(word, start)
+                if index != -1 and index < matched_index:
+                    matched_word = word
+                    matched_index = index
 
-        if end != len(item):
-            text_box.insert(tk.END, item[start:end])
-            word = next(word for word in words if item.startswith(word, end))
-            text_box.insert(tk.END, word, "highlight")
-            start = end + len(word)
+        if matched_word:
+            text_box.insert(tk.END, item[start:matched_index])
+            text_box.insert(tk.END, matched_word, "highlight")
+            start = matched_index + len(matched_word)
         else:
             text_box.insert(tk.END, item[start:] + '\n\n')
             break
