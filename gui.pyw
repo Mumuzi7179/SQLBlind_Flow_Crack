@@ -40,7 +40,7 @@ def run_crack_thread(selected_file_path):
 
     text_box.tag_config("highlight", foreground="red")
 
-    highlight_words = ["flag", "pass", "ctf", "Zmxh",]
+    highlight_words = ["flag", "pass", "ctf", "Zmxh"]
     for item in output:
         if len(item) != 0:
             highlight_in_item(item, highlight_words)
