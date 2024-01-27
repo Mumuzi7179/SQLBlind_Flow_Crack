@@ -26,6 +26,17 @@
 安装依赖库并使用国内源加速：
 `pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
 
-执行`python3 gui.pyw`或双击`gui.pyw`即可
+执行`python3 gui.pyw`或双击`gui.pyw`即可（双击没有效果见文末）
 
 ![演示](https://github.com/Mumuzi7179/SQLBlind_Flow_Crack/assets/74121593/b92baf1a-e34f-454c-bfcb-61432e9e0671)
+
+什么？双击没有效果，大概率是本机装有多个python导致冲突了
+
+1.按下Win + R，输入regedit，然后按Enter打开注册表编辑器。
+
+2.导航到HKEY_CLASSES_ROOT\.pyw。确保该键的默认值设置为Python.NoConFile或类似值。
+
+3.导航到HKEY_CLASSES_ROOT\Python.NoConFile\shell\open\command。
+
+4.确保该键的默认值为"C:\Users\Laptop\AppData\Local\Programs\Python\Python39\pythonw.exe" "%1" %*（根据实际Python安装路径调整）。
+
