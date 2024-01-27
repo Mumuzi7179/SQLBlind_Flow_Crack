@@ -1,0 +1,4 @@
+thinter
+tkinterdnd2
+threading
+pyshark
