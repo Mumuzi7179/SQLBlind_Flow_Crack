@@ -61,7 +61,7 @@ def bool_crack(datas):
             if(next_chat):
                 next_chat = next_chat.group(1)
             if(chat != next_chat):
-                data = re.search(r'\)(>|<|=)(.*?)(--+|#|HTTP)',datas[i])
+                data = re.search(r'\)(>|<|=)(.*?)(\)|\)\)|--+|#|HTTP|END)',datas[i])
                 if(data):
                     data = data.group(2).replace("'", "").replace('"', "")
                     if(data.isdigit() and int(data) > 32):
@@ -84,7 +84,7 @@ def bool_crack(datas):
             if(next_chat):
                 next_chat = next_chat.group(1)
             if(chat != next_chat):
-                data = re.search(r'\)(>|<|=)(.*?)(--+|#|HTTP)',datas[i])
+                data = re.search(r'\)(>|<|=)(.*?)(\)|\)\)|--+|#|HTTP|END)',datas[i])
                 if(data):
                     data = data.group(2).replace("'", "").replace('"', "")
                     if(data.isdigit() and int(data) > 32):
@@ -115,7 +115,7 @@ def bool_crack(datas):
                     next_chat = next_chat.group(1)
                 if (chat != next_chat):
                     length = datas[i].split('LENGTH')[0]
-                    data = re.search(r'\)(>|<|=)(.*?)(\)|\)\)|--+|#|HTTP)', datas[i])
+                    data = re.search(r'\)(>|<|=)(.*?)(\)|\)\)|--+|#|HTTP|END)', datas[i])
                     if (data):
                         data = data.group(2).replace("'", "").replace('"', "")
                         if (data.isdigit() and int(data) > 32):
