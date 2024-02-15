@@ -25,14 +25,15 @@ def judgtype(pcap_file):
 def extract(pcap_file):
     f = open("data.txt",'w')
     packets = pyshark.FileCapture(pcap_file, display_filter='http')
+    count = 0
     for packet in packets:
         try:
             if ('HTTP' in packet):
                 res = unquote(packet.http.response_for_uri)
                 length = len(packet.http.file_data)
-                f.write(str(length)+'LENGTH'+res+'\n')
+                f.write(str(length)+'LENGTH'+res+'END'+'\n')
         except:
             continue
+        count += 1
     packets.close()
-
 
