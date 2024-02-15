@@ -27,9 +27,10 @@ def extract(pcap_file):
     packets = pyshark.FileCapture(pcap_file, display_filter='http')
     for packet in packets:
         try:
-            if ('HTTP' in packet and 'GET' in packet.http.request_method):
-                chat = unquote(packet.http.chat)
-                f.write(chat + '\n')
+            if ('HTTP' in packet):
+                res = unquote(packet.http.response_for_uri)
+                length = len(packet.http.file_data)
+                f.write(str(length)+'LENGTH'+res+'\n')
         except:
             continue
     packets.close()
