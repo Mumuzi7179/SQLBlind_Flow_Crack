@@ -1,4 +1,2 @@
-thinter
-tkinterdnd2
-threading
-pyshark
+tkinterdnd2==0.3.0
+pyshark==0.6
