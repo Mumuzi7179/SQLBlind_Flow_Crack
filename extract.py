@@ -1,7 +1,10 @@
 import pyshark
 from urllib.parse import unquote
+import asyncio
 
 def judgtype(pcap_file):
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     #判断时间盲注 or Bool盲注(= or <>);只对GET类型有效
     ty = 255
     packets = pyshark.FileCapture(pcap_file, display_filter='http')
